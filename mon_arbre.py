@@ -60,7 +60,7 @@ class Solo(Strategy):
         if tools.coups_denvoi:
             return tools.fonce
         return tools.solo
-        
+
 #######
 ## Construction des equipes
 #######
@@ -77,7 +77,7 @@ strat_j1.add('e',Passeur())
 
 
 team1.add("Jexp 1",strat_j1)
-team1.add("Jexp 2",StaticStrategy())
+team1.add("Jexp 2",Attaquant())
 team2 = SoccerTeam("team2")
 team2.add("Solo1", Solo())
 team2.add("rien 2", StaticStrategy())
