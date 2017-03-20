@@ -37,13 +37,6 @@ class Defenseur2(Strategy):
         return tools.defense2
     
     
-class Deftutor(Strategy):
-    def __init__(self):
-        Strategy.__init__(self, "Deftutor")
-    def compute_strategy (self, state, id_team, id_player):
-        tools = Strats(state,id_team,id_player)
-        return tools.defense_tutor
-    
 class MVP_Milieu(Strategy):
     def __init__(self):
         Strategy.__init__(self, "MVP_Milieu")

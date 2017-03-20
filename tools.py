@@ -180,7 +180,8 @@ class Item(object):
         if self.ball_position.x>(GAME_WIDTH*(3.0/4))-10 :
             return True
         return False
-
+         
+        
      
 class Action(Item): 
     @property

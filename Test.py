@@ -54,13 +54,9 @@ if __name__ == "__main__":
     team1.add("Giuly",MesStrategies.Attaquant())
     
     
-    #team2.add("Fonceur",strategy2.Fonceur())
-    #team2.add("Campeur",strategy2.Campeur())
-    #team2.add("Fonceur2",strategy2.Fonceur())
-    #team2.add("Milieu",strategy2.Milieu())
     team2.add("Atk1",MesStrategies.Attaquant())
     team2.add("Def1",MesStrategies.Defenseur())
-    #team2.add("Def2",MesStrategies.Defenseur2())
+
     
     #Creation d'une partie
     simu = Simulation(team1, team2)
