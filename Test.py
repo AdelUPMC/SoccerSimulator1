@@ -48,14 +48,17 @@ class Immobile(Strategy):
 if __name__ == "__main__":
     team1 = SoccerTeam(name="TheLegend27")
     team2 = SoccerTeam(name="Top1")
-    #team1.add("Puyol",MesStrategies.Defenseur()) 
+    team1.add("Puyol",MesStrategies.Defenseur()) 
     team1.add("Zizou",MesStrategies.Solo())
     team1.add("Messi",MesStrategies.MVP_Milieu())
-    #team1.add("Giuly",MesStrategies.Attaquant())
+    team1.add("Giuly",MesStrategies.Attaquant())
+    #team1.add("Millieu2",MesStrategies.MVP_Milieu())
     
     
     team2.add("Atk1",MesStrategies.Attaquant())
     team2.add("Def1",MesStrategies.Defenseur())
+    team2.add("Atk1",MesStrategies.Attaquant())
+    team2.add("Solo1",MesStrategies.Solo())
 
     
     #Creation d'une partie

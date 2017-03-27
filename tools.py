@@ -180,8 +180,27 @@ class Item(object):
         if self.ball_position.x>(GAME_WIDTH*(3.0/4))-10 :
             return True
         return False
-         
         
+    @property
+    def pos_mobile_coeq(self):
+        return Vector2D(self.equipier_pos.x+15,self.equipier_pos.y-15)
+        
+     
+    @property   
+    def joueur_plus_proche_ball(self):
+        
+        l = [(i, j,self.state.player_state(i,j).position.distance(self.ball_position)) for i, j in self.state.players]
+        idt, idp, dist = l[0]
+        for i, j, d in l:
+            if d < dist:
+                idt, idp, dist = i, j, d
+        return self.state.player_state(idt,idp)
+     
+     
+    @property  
+    def pos_joueur_proche_ball(self):
+        return self.joueur_plus_proche_ball.position
+
      
 class Action(Item): 
     @property
@@ -266,11 +285,19 @@ class Action(Item):
     @property
     def degagement(self):
         return SoccerAction(Vector2D(),self.position_att-self.ball_position)
-    
- 
-
+     
+    @property
+    def suivre_action(self):
+        return self.aller(self.pos_mobile_coeq+(4*self.ball_vitesse))
+        
+   
 class Strats(Action):
     
+    @property
+    def immobile(self):
+        return SoccerAction(Vector2D(),Vector2D())
+    
+        
     @property
     def solo(self):
         if self.team_1 :
@@ -340,13 +367,29 @@ class Strats(Action):
     
     @property
     def defmilieu(self):
-        if self.can_shoot :
-            if self.distance_shoot:
-                return self.shoot_angle
+         #si un équipier est plus proche de la balle le joueur se place en fonction de l'equipier le plus proche
+        if ((self.equipier_pos.distance(self.ball_position)<self.my_position.distance(self.ball_position)) and (self.equipier_pos==self.pos_joueur_proche_ball)):
+             return self.suivre_action
+             
+        elif self.can_shoot :
+            
+            if self.my_position.x >= self.equipier_pos.x:
+                if self.distance_shoot:
+                    return self.shoot_angle
+                return self.dribble
             return self.passe_coeq
-        #si le joueur adverse est plus proche de la balle que le joueur actuel
+        
+            
+       
+        
+    
+             
+        #si un joueur adverse est plus proche de la balle que le joueur actuel
         elif (self.position_mes_cages.distance(self.my_position)<70) or (self.pos_adversaire_proche.distance(self.ball_position)< self.my_position.distance(self.ball_position)):
             return self.aller(self.ball_position + (4*self.ball_vitesse) )
+        
+           
+       
         else:
             return self.aller(self.position_mes_cages)
     
