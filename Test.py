@@ -4,7 +4,7 @@ from soccersimulator.gui import show_simu
 from tools import Item, Action
 from soccersimulator.settings import GAME_HEIGHT, GAME_WIDTH
 import MesStrategies
-import strategy2
+
 
 
             
